@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import JsonToExcel from "./JsonToExcel";
 const App = () => {
   const [info, setInfo] = useState([]);
   const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ const App = () => {
     setInfo(response.data);
   };
 
+   
   useEffect(() => {
     fetch_data();
   }, []);
@@ -59,7 +60,9 @@ const App = () => {
   };
 
   return (
-    <div
+    <div>
+
+     <div
       style={{
         fontFamily: "'Segoe UI', sans-serif",
         maxWidth: "800px",
@@ -67,7 +70,6 @@ const App = () => {
         padding: "20px",
       }}
     >
-      {/* Toggle Button */}
       <div style={{ textAlign: "right", marginBottom: "10px" }}>
         <button
           onClick={() => setShowForm((prev) => !prev)}
@@ -89,7 +91,6 @@ const App = () => {
         </button>
       </div>
 
-      {/* Conditional Form */}
       {showForm && (
         <div
           style={{
@@ -181,8 +182,8 @@ const App = () => {
         </div>
       )}
 
-      {/* Table Section */}
       <div style={{ overflowX: "auto" }}>
+        <JsonToExcel/>
         <h2 style={{ marginBottom: "10px", color: "#333" }}>User Table</h2>
         <table
           style={{
@@ -254,7 +255,10 @@ const App = () => {
         </table>
       </div>
     </div>
+    </div>
   );
 };
+
+
 
 export default App;

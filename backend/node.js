@@ -2,11 +2,13 @@
 const express=require("express");
 const cors =require("cors");
 const mongoose = require("mongoose");
-
+require('dotenv').config();
+ 
 // variables
-const LINK="mongodb://localhost:27017/MERN_LATEST";
-const PORT=5000;
+const LINK=process.env.MONGO_URL;
+const PORT=process.env.PORT || 8080;
 
+ 
 
 // Middle Ware
 const app = express();
@@ -15,7 +17,7 @@ app.use(express.json())
 
 
 // DB 
-mongoose.connect(LINK).then(()=>{console.log("DB CREATED")}).catch(()=>{console.log("DB ERROR")});
+mongoose.connect(LINK).then(()=>{console.log("DB CREATED")}).catch((e)=>{console.log(e.message)});
 const my_schema = mongoose.Schema({
     name:{type:String,required:true},
     age:{type:String,required:true},

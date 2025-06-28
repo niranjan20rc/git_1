@@ -5,7 +5,6 @@ import JsonToExcel from "./JsonToExcel";
 const App = () => {
 
   const PORT = import.meta.env.VITE__PORT;
-  const URL=import.meta.env.VITE__URL;
   const [info, setInfo] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +18,7 @@ const App = () => {
 
   // Fetch data
   const fetch_data = async () => {
-    const response = await axios.get(`${URL}/users`);
+    const response = await axios.get('https://git-1-0jtm.onrender.com/users');
     setInfo(response.data);
   };
 
@@ -35,7 +34,7 @@ const App = () => {
 
   // Save new
   const saveData = async () => {
-    await axios.post(`${URL}/users`, formData);
+    await axios.post(`https://git-1-0jtm.onrender.com/users`, formData);
     setFormData({ name: "", age: "", email: "", phone: "", city: "" });
     fetch_data();
     setShowForm(false); // hide form after submit
@@ -50,7 +49,7 @@ const App = () => {
 
   // Update existing
   const updatedData = async () => {
-    await axios.put(`${URL}/users${editIndex}`, formData);
+    await axios.put(`https://git-1-0jtm.onrender.com/users/${editIndex}`, formData);
     setFormData({ name: "", age: "", email: "", phone: "", city: "" });
     setEditIndex(null);
     fetch_data();
@@ -59,7 +58,7 @@ const App = () => {
 
   // Delete user
   const del = async (id) => {
-    await axios.delete(`${URL}/users${id}`);
+    await axios.delete(`https://git-1-0jtm.onrender.com/users/${id}`);
     fetch_data();
   };
 

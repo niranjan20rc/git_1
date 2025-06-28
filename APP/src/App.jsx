@@ -5,6 +5,7 @@ import JsonToExcel from "./JsonToExcel";
 const App = () => {
 
   const PORT = import.meta.env.VITE__PORT;
+  const URL=import.meta.env.VITE__URL;
   const [info, setInfo] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -18,7 +19,7 @@ const App = () => {
 
   // Fetch data
   const fetch_data = async () => {
-    const response = await axios.get(`http://localhost:${PORT}/users`);
+    const response = await axios.get(`${URL}/users`);
     setInfo(response.data);
   };
 
@@ -34,7 +35,7 @@ const App = () => {
 
   // Save new
   const saveData = async () => {
-    await axios.post(`http://localhost:${PORT}/users`, formData);
+    await axios.post(`${URL}/users`, formData);
     setFormData({ name: "", age: "", email: "", phone: "", city: "" });
     fetch_data();
     setShowForm(false); // hide form after submit
@@ -49,7 +50,7 @@ const App = () => {
 
   // Update existing
   const updatedData = async () => {
-    await axios.put(`http://localhost:${PORT}/users${editIndex}`, formData);
+    await axios.put(`${URL}/users${editIndex}`, formData);
     setFormData({ name: "", age: "", email: "", phone: "", city: "" });
     setEditIndex(null);
     fetch_data();
@@ -58,7 +59,7 @@ const App = () => {
 
   // Delete user
   const del = async (id) => {
-    await axios.delete(`http://localhost:${PORT}/users/${id}`);
+    await axios.delete(`${URL}/users${id}`);
     fetch_data();
   };
 

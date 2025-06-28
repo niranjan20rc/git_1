@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.json())
 
 
+
 // DB 
 mongoose.connect(LINK).then(()=>{console.log("DB CREATED")}).catch((e)=>{console.log(e.message)});
 const my_schema = mongoose.Schema({
